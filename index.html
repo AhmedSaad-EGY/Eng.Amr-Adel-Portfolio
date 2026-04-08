@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>AMR ADEL | Precision Surveyor &mdash; Infrastructure Geomatics</title>
     <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="ambient-bg" aria-hidden="true"></div>
     <!-- Floating Capsule Navbar -->
@@ -23,7 +27,8 @@
                 <li><a href="#contact">Connect</a></li>
             </ul>
             <div class="nav-actions">
-                <button class="theme-toggle" id="liquidToggle" aria-label="Toggle theme"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></button>
+                <button class="theme-toggle" id="liquidToggle" aria-label="Toggle theme"><i class="fas fa-sun"></i><i
+                        class="fas fa-moon"></i></button>
                 <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
             </div>
         </div>
@@ -31,87 +36,133 @@
 
     <main class="page-shell">
         <!-- HERO: Split screen with Text Scramble -->
-        <section id="hero" class="hero-split">
+        <section id="hero" class="hero-split section-animate">
             <div class="hero-left">
                 <div class="hero-badge">Geospatial Intelligence</div>
                 <h1 class="hero-title" id="scrambleTitle">AMR ADEL</h1>
                 <div class="hero-gold-line"></div>
                 <p class="hero-tagline">Senior Land Surveyor &middot; 13+ Years &middot; Infrastructure Authority</p>
+                <div class="hero-right">
+                    <div class="hero-portrait hexagon-frame">
+                        <img class="hero-portrait__img" src="formal.png" alt="Amr Adel portrait" loading="lazy" />
+                    </div>
+                </div>
                 <div class="hero-stats">
-                    <div><span>150+</span> km surveyed</div>
-                    <div><span>7</span> Mega Projects</div>
-                    <div><span>100%</span> Precision</div>
+                    <div><span class="count-number" data-target="150">0</span>+ km surveyed</div>
+                    <div><span class="count-number" data-target="7">0</span> Mega Projects</div>
+                    <div><span class="count-number" data-target="100">0</span>% Precision</div>
                 </div>
                 <div class="magnetic-buttons">
                     <button class="btn-magnetic" id="magneticCV"><i class="fas fa-download"></i> Survey CV</button>
-                    <button class="btn-magnetic" id="magneticContact"><i class="fas fa-compass"></i> Project Inquiry</button>
-                </div>
-            </div>
-            <div class="hero-right">
-                <div class="hero-portrait" aria-label="Personal photo placeholder">
-                    <img class="hero-portrait__img" src="formal.png" alt="Amr Adel portrait (replace with your photo)" loading="lazy" />
+                    <button class="btn-magnetic" id="magneticContact"><i class="fas fa-compass"></i> Project
+                        Inquiry</button>
                 </div>
             </div>
         </section>
 
         <!-- About / Precision Statement -->
-        <section class="precision-about">
+        <section class="precision-about section-animate">
             <div class="container">
                 <div class="about-grid">
                     <div class="about-quote">&ldquo;Mapping the future, one coordinate at a time&rdquo;</div>
                     <div class="about-text">
-                        <p>Professional Land Surveyor with over 13 years of experience in land surveying, infrastructure networks, and road construction. Extensive background working with Orascom, Hassan Allam, and Active Brains. Mastery in AutoCAD 2D/3D, total station, GPS, and as-built documentation. Proven leader in utility networks (water, sewage, irrigation).</p>
+                        <p>Professional Land Surveyor with over 13 years of experience in land surveying, infrastructure
+                            networks, and road construction. Extensive background working with Orascom, Hassan Allam,
+                            and Active Brains. Mastery in AutoCAD 2D/3D, total station, GPS, and as-built documentation.
+                            Proven leader in utility networks (water, sewage, irrigation).</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- BENTO GRID SKILLS (spotlight effect) -->
-        <section id="skills" class="bento-skills">
+        <section id="skills" class="bento-skills section-animate">
             <div class="container">
                 <div class="section-title">
-                    <h2>Technical <span>Armory</span></h2>
+                    <h2 class="typing-title">Technical <span>Armory</span></h2>
                     <div class="title-accent"></div>
                 </div>
                 <div class="bento-grid" id="bentoGrid">
-                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-globe-americas"></i><h3>Topographic & Construction Survey</h3><p>High-density point clouds, contour mapping</p></div>
-                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-water"></i><h3>Infrastructure Networks</h3><p>Water, Sewage, Drip Irrigation</p></div>
-                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-road"></i><h3>Road & Site Development</h3><p>Alignment, grading, mass-haul analysis</p></div>
-                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-drafting-compass"></i><h3>AutoCAD 2D/3D</h3><p>As-built & Digital Terrain Models</p></div>
-                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-satellite-dish"></i><h3>Total Station / GPS</h3><p>Leica, Trimble, RTK precision</p></div>
-                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-chart-line"></i><h3>Survey Reports</h3><p>Technical docs & legal boundary</p></div>
+                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-globe-americas"></i>
+                        <h3>Topographic & Construction Survey</h3>
+                        <p>High-density point clouds, contour mapping</p>
+                    </div>
+                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-water"></i>
+                        <h3>Infrastructure Networks</h3>
+                        <p>Water, Sewage, Drip Irrigation</p>
+                    </div>
+                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-road"></i>
+                        <h3>Road & Site Development</h3>
+                        <p>Alignment, grading, mass-haul analysis</p>
+                    </div>
+                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-drafting-compass"></i>
+                        <h3>AutoCAD 2D/3D</h3>
+                        <p>As-built & Digital Terrain Models</p>
+                    </div>
+                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-satellite-dish"></i>
+                        <h3>Total Station / GPS</h3>
+                        <p>Leica, Trimble, RTK precision</p>
+                    </div>
+                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-chart-line"></i>
+                        <h3>Survey Reports</h3>
+                        <p>Technical docs & legal boundary</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- TIMELINE with SVG Drawing (Professional Journey) -->
-        <section id="timeline" class="timeline-draw">
+        <section id="timeline" class="timeline-draw section-animate">
             <div class="container">
                 <div class="section-title">
-                    <h2>Professional <span>Chronology</span></h2>
+                    <h2 class="typing-title">Professional <span>Chronology</span></h2>
                     <div class="title-accent"></div>
                 </div>
                 <div class="timeline-svg-container">
                     <svg class="timeline-svg" viewBox="0 0 100 800" preserveAspectRatio="none">
-                        <path id="timelinePath" d="M50,40 L50,780" stroke="#FFD700" stroke-width="3" stroke-dasharray="8 8" fill="none"/>
+                        <path id="timelinePath" d="M50,40 L50,780" stroke="#FFD700" stroke-width="3"
+                            stroke-dasharray="8 8" fill="none" />
                     </svg>
                     <div class="timeline-items">
-                        <div class="timeline-node"><div class="node-year">2024</div><div class="node-desc">Senior Land Surveyor @ Active Brains &middot; North Coast "Ramla"</div></div>
-                        <div class="timeline-node"><div class="node-year">2022</div><div class="node-desc">Senior Consultant @ Misr Engineering &middot; Toshka Water Mgmt</div></div>
-                        <div class="timeline-node"><div class="node-year">2018</div><div class="node-desc">Land Surveyor @ Misr International &middot; 10th Ramadan Infrastructure</div></div>
-                        <div class="timeline-node"><div class="node-year">2015</div><div class="node-desc">Hassan Allam Sons &middot; Galala City (Water/Sewage Networks)</div></div>
-                        <div class="timeline-node"><div class="node-year">2014</div><div class="node-desc">Dyaa Consulting &middot; Zewail City Campus</div></div>
-                        <div class="timeline-node"><div class="node-year">2013</div><div class="node-desc">Orascom Construction &middot; Cairo-Wahat Road</div></div>
-                        <div class="timeline-node"><div class="node-year">2011</div><div class="node-desc">Marseilia &middot; North Coast Beach Village</div></div>
+                        <div class="timeline-node">
+                            <div class="node-year">2024</div>
+                            <div class="node-desc">Senior Land Surveyor @ Active Brains &middot; North Coast "Ramla"
+                            </div>
+                        </div>
+                        <div class="timeline-node">
+                            <div class="node-year">2022</div>
+                            <div class="node-desc">Senior Consultant @ Misr Engineering &middot; Toshka Water Mgmt</div>
+                        </div>
+                        <div class="timeline-node">
+                            <div class="node-year">2018</div>
+                            <div class="node-desc">Land Surveyor @ Misr International &middot; 10th Ramadan
+                                Infrastructure</div>
+                        </div>
+                        <div class="timeline-node">
+                            <div class="node-year">2015</div>
+                            <div class="node-desc">Hassan Allam Sons &middot; Galala City (Water/Sewage Networks)</div>
+                        </div>
+                        <div class="timeline-node">
+                            <div class="node-year">2014</div>
+                            <div class="node-desc">Dyaa Consulting &middot; Zewail City Campus</div>
+                        </div>
+                        <div class="timeline-node">
+                            <div class="node-year">2013</div>
+                            <div class="node-desc">Orascom Construction &middot; Cairo-Wahat Road</div>
+                        </div>
+                        <div class="timeline-node">
+                            <div class="node-year">2011</div>
+                            <div class="node-desc">Marseilia &middot; North Coast Beach Village</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- HORIZONTAL SCROLL GALLERY (Key Projects) -->
-        <section id="projects" class="horizontal-gallery">
+        <section id="projects" class="horizontal-gallery section-animate">
             <div class="gallery-header">
-                <h2>Flagship <span>Projects</span></h2>
+                <h2 class="typing-title">Flagship <span>Projects</span></h2>
                 <div class="scroll-hint"><i class="fas fa-arrow-right"></i> scroll horizontally</div>
             </div>
             <div class="horizontal-scroll" id="horizontalScroll">
@@ -166,10 +217,10 @@
         </section>
 
         <!-- Education + Contact Fusion -->
-        <section id="contact" class="contact-fusion">
+        <section id="contact" class="contact-fusion section-animate">
             <div class="container">
                 <div class="section-title">
-                    <h2>Contact <span>Hub</span></h2>
+                    <h2 class="typing-title">Contact <span>Hub</span></h2>
                     <div class="title-accent"></div>
                 </div>
 
@@ -200,9 +251,12 @@
                         </div>
 
                         <div class="contact-actions">
-                            <a class="btn-magnetic contact-btn" href="mailto:amr163874@gmail.com"><i class="fas fa-paper-plane"></i> Email</a>
-                            <a class="btn-magnetic contact-btn" href="tel:+201062978485"><i class="fas fa-phone"></i> Call</a>
-                            <a class="btn-magnetic contact-btn" href="https://wa.me/201062978485" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a class="btn-magnetic contact-btn" href="mailto:amr163874@gmail.com"><i
+                                    class="fas fa-paper-plane"></i> Email</a>
+                            <a class="btn-magnetic contact-btn" href="tel:+201062978485"><i class="fas fa-phone"></i>
+                                Call</a>
+                            <a class="btn-magnetic contact-btn" href="https://wa.me/201062978485" target="_blank"
+                                rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                         </div>
 
                         <div class="contact-social">
@@ -214,20 +268,23 @@
                                 <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                                 <a href="#" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
                             </div>
-                            <div class="social-note">Replace the <code>#</code> with your real profile links (Facebook, Instagram, X, etc.).</div>
                         </div>
                     </div>
 
                     <div class="contact-panel contact-panel--form">
-                        <form id="contactForm" class="contact-form" novalidate>
+                        <!-- Formspree endpoint – replace with your own -->
+                        <form id="contactForm" class="contact-form" action="https://formspree.io/f/xeqdwqkv"
+                            method="POST" novalidate>
                             <div class="form-row form-row--two">
                                 <label class="field">
                                     <span class="field-label">Name</span>
-                                    <input class="field-input" type="text" name="name" autocomplete="name" required placeholder="Your name" />
+                                    <input class="field-input" type="text" name="name" autocomplete="name" required
+                                        placeholder="Your name" />
                                 </label>
                                 <label class="field">
                                     <span class="field-label">Email</span>
-                                    <input class="field-input" type="email" name="email" autocomplete="email" required placeholder="you@email.com" />
+                                    <input class="field-input" type="email" name="email" autocomplete="email" required
+                                        placeholder="you@email.com" />
                                 </label>
                             </div>
 
@@ -238,21 +295,25 @@
 
                             <label class="field">
                                 <span class="field-label">Message</span>
-                                <textarea class="field-input field-textarea" name="message" rows="6" required placeholder="Tell me about your project, scope, and timeline..."></textarea>
+                                <textarea class="field-input field-textarea" name="message" rows="6" required
+                                    placeholder="Tell me about your project, scope, and timeline..."></textarea>
                             </label>
 
                             <div class="form-actions">
-                                <button class="btn-magnetic" type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+                                <button class="btn-magnetic" type="submit"><i class="fas fa-paper-plane"></i> Send
+                                    Message</button>
                                 <div class="form-status" id="formStatus" aria-live="polite"></div>
                             </div>
-                            <div class="form-note">This sends using your email app (mailto). If you want direct web sending, I can connect it to Formspree/Netlify later.</div>
                         </form>
                     </div>
                 </div>
 
                 <div class="edu-card">
                     <i class="fas fa-graduation-cap"></i>
-                    <div><h3>Zagazig University</h3><p>Bachelor's Degree in Geography &middot; 2011</p></div>
+                    <div>
+                        <h3>Zagazig University</h3>
+                        <p>Bachelor's Degree in Geography &middot; 2011</p>
+                    </div>
                 </div>
 
                 <div class="premium-footer">
@@ -264,4 +325,5 @@
 
     <script src="app.js" defer></script>
 </body>
+
 </html>
