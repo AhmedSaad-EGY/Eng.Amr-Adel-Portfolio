@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>AMR ADEL | Precision Surveyor &mdash; Infrastructure Geomatics</title>
+    <title>AMR ADEL | Precision Surveyor — Infrastructure Geomatics</title>
     <!-- Fonts & Icons -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
@@ -14,39 +14,44 @@
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="ambient-bg" aria-hidden="true"></div>
-    <!-- Floating Capsule Navbar -->
-    <nav class="floating-nav" id="floatingNav">
-        <div class="nav-capsule">
-            <div class="logo">AMR<span>ADEL</span></div>
-            <ul class="nav-links">
-                <li><a href="#hero">Studio</a></li>
-                <li><a href="#skills">Capabilities</a></li>
-                <li><a href="#timeline">Chronology</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Connect</a></li>
+    <div class="floating-shapes-container" aria-hidden="true"></div>
+
+    <!-- Floating Navbar (rebuild) -->
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="navbar-container">
+            <a href="#hero" class="logo" aria-label="Home">AMR<span>ADEL</span></a>
+
+            <ul class="nav-menu" id="navMenu" role="list">
+                <li><a href="#hero" class="nav-link" aria-current="page">Home</a></li>
+                <li><a href="#skills" class="nav-link">Capabilities</a></li>
+                <li><a href="#timeline" class="nav-link">Chronology</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Connect</a></li>
             </ul>
-            <div class="nav-actions">
-                <button class="theme-toggle" id="liquidToggle" aria-label="Toggle theme"><i class="fas fa-sun"></i><i
-                        class="fas fa-moon"></i></button>
-                <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+            <div class="navbar-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Switch theme" aria-pressed="false">
+                    <i class="fas fa-sun" aria-hidden="true"></i>
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Menu" aria-expanded="false"
+                    aria-controls="navMenu">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </nav>
 
-    <main class="page-shell">
-        <!-- HERO: Split screen with Text Scramble -->
+    <main id="main-content" class="page-shell">
+        <!-- HERO: Split screen with Text Scramble + mobile reorder -->
         <section id="hero" class="hero-split section-animate">
             <div class="hero-left">
                 <div class="hero-badge">Geospatial Intelligence</div>
                 <h1 class="hero-title" id="scrambleTitle">AMR ADEL</h1>
                 <div class="hero-gold-line"></div>
-                <p class="hero-tagline">Senior Land Surveyor &middot; 13+ Years &middot; Infrastructure Authority</p>
-                <div class="hero-right">
-                    <div class="hero-portrait hexagon-frame">
-                        <img class="hero-portrait__img" src="formal.png" alt="Amr Adel portrait" loading="lazy" />
-                    </div>
-                </div>
+                <p class="hero-tagline">Senior Land Surveyor · 14+ Years · Infrastructure Authority</p>
                 <div class="hero-stats">
                     <div><span class="count-number" data-target="150">0</span>+ km surveyed</div>
                     <div><span class="count-number" data-target="7">0</span> Mega Projects</div>
@@ -56,6 +61,12 @@
                     <button class="btn-magnetic" id="magneticCV"><i class="fas fa-download"></i> Survey CV</button>
                     <button class="btn-magnetic" id="magneticContact"><i class="fas fa-compass"></i> Project
                         Inquiry</button>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-portrait hexagon-frame live-border">
+                    <img class="hero-portrait__img" src="formal.png" alt="Amr Adel portrait" width="400" height="400"
+                        loading="eager" />
                 </div>
             </div>
         </section>
@@ -82,28 +93,28 @@
                     <h2 class="typing-title">Technical <span>Armory</span></h2>
                     <div class="title-accent"></div>
                 </div>
-                <div class="bento-grid" id="bentoGrid">
-                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-globe-americas"></i>
+                <div class="bento-grid">
+                    <div class="bento-card"><i class="fas fa-globe-americas"></i>
                         <h3>Topographic & Construction Survey</h3>
                         <p>High-density point clouds, contour mapping</p>
                     </div>
-                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-water"></i>
+                    <div class="bento-card"><i class="fas fa-water"></i>
                         <h3>Infrastructure Networks</h3>
                         <p>Water, Sewage, Drip Irrigation</p>
                     </div>
-                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-road"></i>
+                    <div class="bento-card"><i class="fas fa-road"></i>
                         <h3>Road & Site Development</h3>
                         <p>Alignment, grading, mass-haul analysis</p>
                     </div>
-                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-drafting-compass"></i>
+                    <div class="bento-card"><i class="fas fa-drafting-compass"></i>
                         <h3>AutoCAD 2D/3D</h3>
                         <p>As-built & Digital Terrain Models</p>
                     </div>
-                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-satellite-dish"></i>
+                    <div class="bento-card"><i class="fas fa-satellite-dish"></i>
                         <h3>Total Station / GPS</h3>
                         <p>Leica, Trimble, RTK precision</p>
                     </div>
-                    <div class="bento-card" data-cursor="spotlight"><i class="fas fa-chart-line"></i>
+                    <div class="bento-card"><i class="fas fa-chart-line"></i>
                         <h3>Survey Reports</h3>
                         <p>Technical docs & legal boundary</p>
                     </div>
@@ -111,7 +122,7 @@
             </div>
         </section>
 
-        <!-- TIMELINE with SVG Drawing (Professional Journey) -->
+        <!-- TIMELINE with SVG Drawing -->
         <section id="timeline" class="timeline-draw section-animate">
             <div class="container">
                 <div class="section-title">
@@ -119,47 +130,46 @@
                     <div class="title-accent"></div>
                 </div>
                 <div class="timeline-svg-container">
-                    <svg class="timeline-svg" viewBox="0 0 100 800" preserveAspectRatio="none">
+                    <svg class="timeline-svg" viewBox="0 0 100 800" preserveAspectRatio="none" aria-hidden="true">
                         <path id="timelinePath" d="M50,40 L50,780" stroke="#FFD700" stroke-width="3"
                             stroke-dasharray="8 8" fill="none" />
                     </svg>
                     <div class="timeline-items">
                         <div class="timeline-node">
                             <div class="node-year">2024</div>
-                            <div class="node-desc">Senior Land Surveyor @ Active Brains &middot; North Coast "Ramla"
-                            </div>
+                            <div class="node-desc">Senior Land Surveyor @ Active Brains · North Coast "Ramla"</div>
                         </div>
                         <div class="timeline-node">
                             <div class="node-year">2022</div>
-                            <div class="node-desc">Senior Consultant @ Misr Engineering &middot; Toshka Water Mgmt</div>
+                            <div class="node-desc">Senior Consultant @ Misr Engineering · Toshka Water Mgmt</div>
                         </div>
                         <div class="timeline-node">
                             <div class="node-year">2018</div>
-                            <div class="node-desc">Land Surveyor @ Misr International &middot; 10th Ramadan
-                                Infrastructure</div>
+                            <div class="node-desc">Land Surveyor @ Misr International · 10th Ramadan Infrastructure
+                            </div>
                         </div>
                         <div class="timeline-node">
                             <div class="node-year">2015</div>
-                            <div class="node-desc">Hassan Allam Sons &middot; Galala City (Water/Sewage Networks)</div>
+                            <div class="node-desc">Hassan Allam Sons · Galala City (Water/Sewage Networks)</div>
                         </div>
                         <div class="timeline-node">
                             <div class="node-year">2014</div>
-                            <div class="node-desc">Dyaa Consulting &middot; Zewail City Campus</div>
+                            <div class="node-desc">Dyaa Consulting · Zewail City Campus</div>
                         </div>
                         <div class="timeline-node">
                             <div class="node-year">2013</div>
-                            <div class="node-desc">Orascom Construction &middot; Cairo-Wahat Road</div>
+                            <div class="node-desc">Orascom Construction · Cairo-Wahat Road</div>
                         </div>
                         <div class="timeline-node">
                             <div class="node-year">2011</div>
-                            <div class="node-desc">Marseilia &middot; North Coast Beach Village</div>
+                            <div class="node-desc">Marseilia · North Coast Beach Village</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- HORIZONTAL SCROLL GALLERY (Key Projects) -->
+        <!-- HORIZONTAL SCROLL GALLERY (with custom scrollbar) -->
         <section id="projects" class="horizontal-gallery section-animate">
             <div class="gallery-header">
                 <h2 class="typing-title">Flagship <span>Projects</span></h2>
@@ -169,25 +179,28 @@
                 <div class="gallery-track">
                     <div class="project-card">
                         <div class="project-img">
-                            <img src="Ramla Ultra Project.png" alt="Ramla Ultra Project preview" loading="lazy" />
+                            <img src="Ramla Ultra Project.png" alt="Ramla Ultra Project preview" width="360"
+                                height="202" loading="lazy" />
                         </div>
                         <div class="project-body">
                             <h3>Ramla Ultra Project</h3>
-                            <p>North Coast &middot; Infrastructure & Roadworks</p>
+                            <p>North Coast · Infrastructure & Roadworks</p>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-img">
-                            <img src="Toshka Mega Irrigation.jpg" alt="Toshka Mega Irrigation preview" loading="lazy" />
+                            <img src="Toshka Mega Irrigation.jpg" alt="Toshka Mega Irrigation preview" width="360"
+                                height="202" loading="lazy" />
                         </div>
                         <div class="project-body">
                             <h3>Toshka Mega Irrigation</h3>
-                            <p>Drip irrigation &middot; 12,000 acres</p>
+                            <p>Drip irrigation · 12,000 acres</p>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-img">
-                            <img src="Galala City Resort.jpg" alt="Galala City Resort preview" loading="lazy" />
+                            <img src="Galala City Resort.jpg" alt="Galala City Resort preview" width="360" height="202"
+                                loading="lazy" />
                         </div>
                         <div class="project-body">
                             <h3>Galala City Resort</h3>
@@ -196,7 +209,8 @@
                     </div>
                     <div class="project-card">
                         <div class="project-img">
-                            <img src="Cairo-Wahat Highway.jpg" alt="Cairo-Wahat Highway preview" loading="lazy" />
+                            <img src="Cairo-Wahat Highway.jpg" alt="Cairo-Wahat Highway preview" width="360"
+                                height="202" loading="lazy" />
                         </div>
                         <div class="project-body">
                             <h3>Cairo-Wahat Highway</h3>
@@ -205,7 +219,8 @@
                     </div>
                     <div class="project-card">
                         <div class="project-img">
-                            <img src="Zewail City Campus.jpg" alt="Zewail City Campus preview" loading="lazy" />
+                            <img src="Zewail City Campus.jpg" alt="Zewail City Campus preview" width="360" height="202"
+                                loading="lazy" />
                         </div>
                         <div class="project-body">
                             <h3>Zewail City Campus</h3>
@@ -216,7 +231,7 @@
             </div>
         </section>
 
-        <!-- Education + Contact Fusion -->
+        <!-- Contact + Education -->
         <section id="contact" class="contact-fusion section-animate">
             <div class="container">
                 <div class="section-title">
@@ -260,7 +275,7 @@
                         </div>
 
                         <div class="contact-social">
-                            <div class="social-title">Space for more links</div>
+                            <div class="social-title">Connect on social</div>
                             <div class="social-glow">
                                 <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                                 <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
@@ -272,7 +287,6 @@
                     </div>
 
                     <div class="contact-panel contact-panel--form">
-                        <!-- Formspree endpoint – replace with your own -->
                         <form id="contactForm" class="contact-form" action="https://formspree.io/f/xeqdwqkv"
                             method="POST" novalidate>
                             <div class="form-row form-row--two">
@@ -287,18 +301,15 @@
                                         placeholder="you@email.com" />
                                 </label>
                             </div>
-
                             <label class="field">
                                 <span class="field-label">Subject</span>
                                 <input class="field-input" type="text" name="subject" placeholder="Project inquiry" />
                             </label>
-
                             <label class="field">
                                 <span class="field-label">Message</span>
                                 <textarea class="field-input field-textarea" name="message" rows="6" required
                                     placeholder="Tell me about your project, scope, and timeline..."></textarea>
                             </label>
-
                             <div class="form-actions">
                                 <button class="btn-magnetic" type="submit"><i class="fas fa-paper-plane"></i> Send
                                     Message</button>
@@ -312,12 +323,12 @@
                     <i class="fas fa-graduation-cap"></i>
                     <div>
                         <h3>Zagazig University</h3>
-                        <p>Bachelor's Degree in Geography &middot; 2011</p>
+                        <p>Bachelor's Degree in Geography · 2011</p>
                     </div>
                 </div>
 
                 <div class="premium-footer">
-                    <p class="copy">&copy; 2025 AMR ADEL &mdash; Precision Geomatics</p>
+                    <p class="copy">&copy; 2025 AMR ADEL — Precision Geomatics</p>
                 </div>
             </div>
         </section>
