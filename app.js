@@ -2,7 +2,6 @@
 
 (function() {
     // ---------- 1. NATIVE SINGLE-PAGE SCROLLING ----------
-    // Keep normal document scrolling so anchor links work reliably.
     const getScrollY = () => window.scrollY || document.documentElement.scrollTop || 0;
 
     // ---------- 2. TEXT SCRAMBLE ANIMATION ----------
@@ -60,26 +59,34 @@
     // ---------- 5. SVG TIMELINE DRAWING ON SCROLL (using Intersection Observer) ----------
     const timelinePath = document.getElementById('timelinePath');
     if (timelinePath) {
-        const length = timelinePath.getTotalLength();
-        timelinePath.style.strokeDasharray = length;
-        timelinePath.style.strokeDashoffset = length;
-        const observerTimeline = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    let start = null;
-                    function animateDraw(timestamp) {
-                        if (!start) start = timestamp;
-                        const progress = Math.min(1, (timestamp - start) / 1500);
-                        timelinePath.style.strokeDashoffset = length - (progress * length);
-                        if (progress < 1) requestAnimationFrame(animateDraw);
+        // Ensure the path exists and has length
+        let length = 0;
+        try {
+            length = timelinePath.getTotalLength();
+        } catch(e) {
+            console.warn("SVG path length not available:", e);
+        }
+        if (length > 0) {
+            timelinePath.style.strokeDasharray = length;
+            timelinePath.style.strokeDashoffset = length;
+            const observerTimeline = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        let start = null;
+                        function animateDraw(timestamp) {
+                            if (!start) start = timestamp;
+                            const progress = Math.min(1, (timestamp - start) / 1500);
+                            timelinePath.style.strokeDashoffset = length - (progress * length);
+                            if (progress < 1) requestAnimationFrame(animateDraw);
+                        }
+                        requestAnimationFrame(animateDraw);
+                        observerTimeline.unobserve(entry.target);
                     }
-                    requestAnimationFrame(animateDraw);
-                    observerTimeline.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.4 });
-        const timelineContainer = document.querySelector('.timeline-svg-container');
-        if (timelineContainer) observerTimeline.observe(timelineContainer);
+                });
+            }, { threshold: 0.4 });
+            const timelineContainer = document.querySelector('.timeline-svg-container');
+            if (timelineContainer) observerTimeline.observe(timelineContainer);
+        }
     }
 
     // ---------- 6. HEX THEME TOGGLE (honeycomb transition) ----------
@@ -118,7 +125,7 @@
         const viewportW = window.innerWidth;
         const viewportH = window.innerHeight;
         const cellW = Math.min(96, Math.max(64, Math.round(viewportW / 14)));
-        const cellH = Math.round(cellW * 0.866); // ~sqrt(3)/2 for flat-top hex
+        const cellH = Math.round(cellW * 0.866);
         const stepX = Math.round(cellW * 0.75);
         const stepY = cellH;
 
@@ -155,8 +162,7 @@
         overlay.appendChild(fragment);
         document.body.appendChild(overlay);
 
-        // Force layout so the class change triggers transitions.
-        overlay.offsetHeight;
+        overlay.offsetHeight; // force reflow
         overlay.classList.add('on');
 
         return { overlay, maxDelay };
@@ -171,7 +177,7 @@
         const clickY = (e && typeof e.clientY === 'number') ? e.clientY : (rect.top + rect.height / 2);
 
         const nextIsDark = !isDark;
-        const targetColor = nextIsDark ? '#0A0A0A' : '#F5F5F5';
+        const targetColor = nextIsDark ? '#0b0f14' : '#F5F5F5';
 
         if (prefersReducedMotion) {
             setTheme(nextIsDark);
@@ -184,7 +190,6 @@
         const cellMs = 520;
         const enterDoneMs = maxDelay + cellMs;
 
-        // Start exit wave (reverse delays) so hexes disappear, then switch theme.
         window.setTimeout(() => {
             overlay.querySelectorAll('.hex-cell').forEach((cell) => {
                 const inDelay = Number(cell.dataset.d || 0);
@@ -197,10 +202,11 @@
         const exitDoneMs = enterDoneMs + 60 + maxDelay + cellMs;
         window.setTimeout(() => setTheme(nextIsDark), exitDoneMs + 40);
         window.setTimeout(() => {
-            overlay.remove();
+            if (overlay && overlay.parentNode) overlay.remove();
             isThemeAnimating = false;
         }, exitDoneMs + 140);
     }
+
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', toggleThemeHex);
         updateThemeIcons();
@@ -210,10 +216,12 @@
     const floatingNav = document.querySelector('.floating-nav');
     function handleNavScroll() {
         const scrollY = getScrollY();
-        if (scrollY > 50) {
-            floatingNav?.classList.add('scrolled');
-        } else {
-            floatingNav?.classList.remove('scrolled');
+        if (floatingNav) {
+            if (scrollY > 50) {
+                floatingNav.classList.add('scrolled');
+            } else {
+                floatingNav.classList.remove('scrolled');
+            }
         }
     }
     window.addEventListener('scroll', handleNavScroll, { passive: true });
@@ -264,6 +272,7 @@
             URL.revokeObjectURL(link.href);
         });
     }
+
     const contactBtn = document.getElementById('magneticContact');
     if (contactBtn) {
         contactBtn.addEventListener('click', () => {
@@ -279,8 +288,7 @@
     const formStatus = document.getElementById('formStatus');
     if (contactForm) {
         const setStatus = (message) => {
-            if (!formStatus) return;
-            formStatus.textContent = message || '';
+            if (formStatus) formStatus.textContent = message || '';
         };
 
         contactForm.addEventListener('submit', (e) => {
@@ -328,5 +336,4 @@
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observerFade.observe(el);
     });
-
 })();
