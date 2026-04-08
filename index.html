@@ -21,7 +21,7 @@
     <!-- Floating Navbar (rebuild) -->
     <nav class="navbar" aria-label="Main navigation">
         <div class="navbar-container">
-            <a href="#hero" class="logo" aria-label="Home">AMR<span>ADEL</span></a>
+            <a href="#hero" class="logo" aria-label="Home">AMR<span> ADEL</span></a>
 
             <ul class="nav-menu" id="navMenu" role="list">
                 <li><a href="#hero" class="nav-link" aria-current="page">Home</a></li>
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="hero-right">
-                <div class="hero-portrait hexagon-frame live-border">
+                <div class="hero-portrait">
                     <img class="hero-portrait__img" src="formal.png" alt="Amr Adel portrait" width="400" height="400"
                         loading="eager" />
                 </div>
@@ -77,10 +77,16 @@
                 <div class="about-grid">
                     <div class="about-quote">&ldquo;Mapping the future, one coordinate at a time&rdquo;</div>
                     <div class="about-text">
-                        <p>Professional Land Surveyor with over 13 years of experience in land surveying, infrastructure
-                            networks, and road construction. Extensive background working with Orascom, Hassan Allam,
-                            and Active Brains. Mastery in AutoCAD 2D/3D, total station, GPS, and as-built documentation.
-                            Proven leader in utility networks (water, sewage, irrigation).</p>
+                        <ul class="about-points" role="list">
+                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> 14+ years of professional
+                                expertise in infrastructure and road construction.</li>
+                            <li><i class="fas fa-hard-hat" aria-hidden="true"></i> Extensive track record with industry
+                                leaders: Orascom, Hassan Allam, and Active Brains.</li>
+                            <li><i class="fas fa-microchip" aria-hidden="true"></i> Mastery in AutoCAD 2D/3D, Total
+                                Station, GPS, and as-built documentation.</li>
+                            <li><i class="fas fa-project-diagram" aria-hidden="true"></i> Proven leadership in utility
+                                networks including water, sewage, and irrigation.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -90,7 +96,7 @@
         <section id="skills" class="bento-skills section-animate">
             <div class="container">
                 <div class="section-title">
-                    <h2 class="typing-title">Technical <span>Armory</span></h2>
+                    <h2>Technical <span>Armory</span></h2>
                     <div class="title-accent"></div>
                 </div>
                 <div class="bento-grid">
@@ -126,12 +132,12 @@
         <section id="timeline" class="timeline-draw section-animate">
             <div class="container">
                 <div class="section-title">
-                    <h2 class="typing-title">Professional <span>Chronology</span></h2>
+                    <h2>Professional <span>Chronology</span></h2>
                     <div class="title-accent"></div>
                 </div>
                 <div class="timeline-svg-container">
-                    <svg class="timeline-svg" viewBox="0 0 100 800" preserveAspectRatio="none" aria-hidden="true">
-                        <path id="timelinePath" d="M50,40 L50,780" stroke="#FFD700" stroke-width="3"
+                    <svg class="timeline-svg" viewBox="0 0 3 1000" preserveAspectRatio="none" aria-hidden="true">
+                        <path id="timelinePath" d="M 1.5 0 L 1.5 1000" stroke="#FFD700" stroke-width="3"
                             stroke-dasharray="8 8" fill="none" />
                     </svg>
                     <div class="timeline-items">
@@ -172,8 +178,10 @@
         <!-- HORIZONTAL SCROLL GALLERY (with custom scrollbar) -->
         <section id="projects" class="horizontal-gallery section-animate">
             <div class="gallery-header">
-                <h2 class="typing-title">Flagship <span>Projects</span></h2>
-                <div class="scroll-hint"><i class="fas fa-arrow-right"></i> scroll horizontally</div>
+                <h2>Flagship <span>Projects</span></h2>
+                <div class="scroll-navigation">
+                    <div class="scroll-hint"><i class="fas fa-arrow-right"></i> scroll</div>
+                </div>
             </div>
             <div class="horizontal-scroll" id="horizontalScroll">
                 <div class="gallery-track">
@@ -235,7 +243,7 @@
         <section id="contact" class="contact-fusion section-animate">
             <div class="container">
                 <div class="section-title">
-                    <h2 class="typing-title">Contact <span>Hub</span></h2>
+                    <h2>Contact <span>Hub</span></h2>
                     <div class="title-accent"></div>
                 </div>
 
@@ -277,11 +285,16 @@
                         <div class="contact-social">
                             <div class="social-title">Connect on social</div>
                             <div class="social-glow">
-                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                                <a href="#" aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
+                                <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener"
+                                    aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://github.com/your-username" target="_blank" rel="noopener"
+                                    aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="https://facebook.com/your-profile" target="_blank" rel="noopener"
+                                    aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://instagram.com/your-profile" target="_blank" rel="noopener"
+                                    aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="https://twitter.com/your-profile" target="_blank" rel="noopener"
+                                    aria-label="X (Twitter)"><i class="fab fa-twitter"></i></a>
                             </div>
                         </div>
                     </div>
@@ -333,6 +346,10 @@
             </div>
         </section>
     </main>
+
+    <button id="backToTopBtn" class="back-to-top-btn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="app.js" defer></script>
 </body>

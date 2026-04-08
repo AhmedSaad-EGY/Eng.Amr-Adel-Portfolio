@@ -75,7 +75,8 @@
     navLinks.forEach((link) => {
       link.classList.remove("active");
       link.removeAttribute("aria-current");
-      if (link.getAttribute("href") === `#${currentId}`) {
+      const href = link.getAttribute("href");
+      if (href === `#${currentId}` || (currentId === "" && href === "#hero")) {
         link.classList.add("active");
         link.setAttribute("aria-current", "page");
       }
@@ -145,7 +146,7 @@
         const rect = btn.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.03)`;
       });
       btn.addEventListener("mouseleave", () => {
         btn.style.transform = "translate(0px, 0px)";
@@ -273,12 +274,14 @@
       return;
     }
     const rect = themeToggle.getBoundingClientRect();
-    const clickX = e.clientX ?? rect.left + rect.width / 2;
-    const clickY = e.clientY ?? rect.top + rect.height / 2;
+    const clickX =
+      e && e.clientX !== undefined ? e.clientX : rect.left + rect.width / 2;
+    const clickY =
+      e && e.clientY !== undefined ? e.clientY : rect.top + rect.height / 2;
     const nextIsDark = !isDark;
     const targetColor = nextIsDark ? "#0b0f14" : "#F5F5F5";
     const { overlay, maxDelay } = buildHexOverlay(clickX, clickY, targetColor);
-    const duration = 400; // Matches CSS transition-duration
+    const duration = 400; // Matches .hex-cell transition-duration in CSS
     setTimeout(() => {
       setTheme(nextIsDark);
       overlay.classList.add("out");
@@ -297,7 +300,7 @@
   }
 
   // ========== COUNTERS ==========
-  const counters = document.querySelectorAll(".count-number");
+  const counters = document.querySelectorAll(".count-number"); // Kept counters as is
   const counterObserver = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
@@ -325,46 +328,50 @@
   counters.forEach((c) => counterObserver.observe(c));
 
   // ========== TYPING EFFECT (safe) ==========
-  const typingTitles = document.querySelectorAll(".typing-title");
-  const typeObserver = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !prefersReducedMotion) {
-          const el = entry.target;
-          const originalHTML = el.innerHTML;
-          const textOnly = el.innerText;
-          el.innerHTML = "";
-          let i = 0;
-          function typeNext() {
-            if (i < textOnly.length) {
-              el.innerHTML += textOnly.charAt(i);
-              i++;
-              setTimeout(typeNext, 50);
-            } else {
-              if (originalHTML.includes("<span")) {
-                const temp = document.createElement("div");
-                temp.innerHTML = originalHTML;
-                const spans = temp.querySelectorAll("span");
-                spans.forEach((span) => {
-                  const spanText = span.innerText;
-                  if (el.innerText.includes(spanText)) {
-                    el.innerHTML = el.innerText.replace(
-                      spanText,
-                      `<span>${spanText}</span>`,
-                    );
-                  }
-                });
-              }
-            }
-          }
-          typeNext();
-          obs.unobserve(el);
-        }
-      });
-    },
-    { threshold: 0.5 },
-  );
-  typingTitles.forEach((t) => typeObserver.observe(t));
+  // Removed typing effect from multiple titles as per suggestion.
+  // The scramble effect on scrambleTitle in the hero section is kept.
+  // If a single typing effect is desired, it should be applied to a specific element.
+  // For now, the typing effect logic is commented out or removed if no specific target is identified.
+  // const typingTitles = document.querySelectorAll(".typing-title");
+  // const typeObserver = new IntersectionObserver(
+  //   (entries, obs) => {
+  //     entries.forEach((entry) => {
+  //       if (entry.isIntersecting && !prefersReducedMotion) {
+  //         const el = entry.target;
+  //         const originalHTML = el.innerHTML;
+  //         const textOnly = el.innerText;
+  //         el.innerHTML = "";
+  //         let i = 0;
+  //         function typeNext() {
+  //           if (i < textOnly.length) {
+  //             el.innerHTML += textOnly.charAt(i);
+  //             i++;
+  //             setTimeout(typeNext, 50);
+  //           } else {
+  //             if (originalHTML.includes("<span")) {
+  //               const temp = document.createElement("div");
+  //               temp.innerHTML = originalHTML;
+  //               const spans = temp.querySelectorAll("span");
+  //               spans.forEach((span) => {
+  //                 const spanText = span.innerText;
+  //                 if (el.innerText.includes(spanText)) {
+  //                   el.innerHTML = el.innerText.replace(
+  //                     spanText,
+  //                     `<span>${spanText}</span>`,
+  //                   );
+  //                 }
+  //               });
+  //             }
+  //           }
+  //         }
+  //         typeNext();
+  //         obs.unobserve(el);
+  //       }
+  //     });
+  //   },
+  //   { threshold: 0.5 },
+  // );
+  // typingTitles.forEach((t) => typeObserver.observe(t));
 
   // ========== SECTION REVEAL ==========
   document.querySelectorAll(".section-animate").forEach((section) => {
@@ -452,17 +459,37 @@
     );
   }
 
+  // ========== HORIZONTAL SCROLL NAVIGATION ARROWS ==========
+  const scrollLeftArrow = document.querySelector(".scroll-arrow--left");
+  const scrollRightArrow = document.querySelector(".scroll-arrow--right");
+  const horizontalScrollContainer = document.getElementById("horizontalScroll");
+
+  if (scrollLeftArrow && scrollRightArrow && horizontalScrollContainer) {
+    scrollLeftArrow.addEventListener("click", () => {
+      horizontalScrollContainer.scrollBy({
+        left: -horizontalScrollContainer.offsetWidth * 0.8, // Scroll by 80% of container width
+        behavior: "smooth",
+      });
+    });
+    scrollRightArrow.addEventListener("click", () => {
+      horizontalScrollContainer.scrollBy({
+        left: horizontalScrollContainer.offsetWidth * 0.8, // Scroll by 80% of container width
+        behavior: "smooth",
+      });
+    });
+  }
+
   // ========== FLOATING SHAPES BACKGROUND ==========
   const floatingShapesContainer = document.querySelector(
     ".floating-shapes-container",
   );
 
   if (floatingShapesContainer && !prefersReducedMotion) {
-    const numberOfShapes = 12;
+    const numberOfShapes = 10;
     const shapeClasses = [
       "shape-circle",
-      "shape-square",
-      "shape-rectangle",
+      "shape-square", // Added to CSS
+      "shape-rectangle", // Added to CSS
       "shape-triangle",
       "shape-quadrilateral",
       "shape-pentagon",
@@ -492,7 +519,7 @@
           shape.style.height = `${baseSize * (0.5 + Math.random() * 0.8)}px`;
         }
 
-        // سرعة الحركة والدوران
+        // Movement and rotation speed
         const floatDuration = 12 + Math.random() * 8;
         const rotateDuration = 6 + Math.random() * 8;
 
@@ -506,5 +533,25 @@
         floatingShapesContainer.appendChild(shape);
       }
     }, 1000);
+  }
+
+  // ========== BACK TO TOP BUTTON ==========
+  const backToTopBtn = document.getElementById("backToTopBtn");
+
+  if (backToTopBtn) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add("show");
+      } else {
+        backToTopBtn.classList.remove("show");
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
   }
 })();
