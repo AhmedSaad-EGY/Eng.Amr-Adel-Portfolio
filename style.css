@@ -19,6 +19,7 @@
     --card-bg: rgba(255, 255, 255, 0.06);
     --glass-bg: rgba(15, 22, 32, 0.52);
     --glass-strong: rgba(15, 22, 32, 0.74);
+    --toggle-button-bg: rgba(255, 255, 255, 0.08); /* Default for dark mode */
     --shadow-md: 0 18px 45px rgba(0, 0, 0, 0.35);
     --shadow-lg: 0 30px 90px rgba(0, 0, 0, 0.55);
     --transition-smooth: 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -28,6 +29,7 @@
     --space-sm: 1rem;
     --space-md: 2rem;
     --space-lg: 4rem;
+    --space-xl: 6rem;
 
     /* Section Backgrounds */
     --section-bg-1: transparent;
@@ -35,7 +37,6 @@
     --section-bg-3: rgba(255, 255, 255, 0.015);
     --section-bg-4: rgba(255, 255, 255, 0.02);
     --section-bg-5: rgba(255, 255, 255, 0.01);
-    --space-xl: 6rem;
 }
 
 /* Light theme */
@@ -48,6 +49,9 @@
     --border-dim: #DDDDDD;
     --card-bg: rgba(255, 255, 255, 0.85);
     --glass-bg: rgba(245, 245, 245, 0.9);
+    --glass-strong: rgba(255, 255, 255, 0.95); 
+    --gold-glow: rgba(106, 80, 17, 0.25);
+    --toggle-button-bg: rgba(0, 0, 0, 0.08);
 }
 
 html {
@@ -62,42 +66,6 @@ body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.3s ease, color 0.2s ease;
-}
-
-/* Custom Scrollbar Styles for the entire page */
-body::-webkit-scrollbar {
-    width: 8px;
-}
-
-body::-webkit-scrollbar-track {
-    background: var(--carbon);
-}
-
-body::-webkit-scrollbar-thumb {
-    background: var(--gold);
-    border-radius: 10px;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-    background: #e6b422;
-}
-
-/* Custom Scrollbar Styles for the entire page */
-body::-webkit-scrollbar {
-    width: 8px;
-}
-
-body::-webkit-scrollbar-track {
-    background: var(--carbon);
-}
-
-body::-webkit-scrollbar-thumb {
-    background: var(--gold);
-    border-radius: 10px;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-    background: #e6b422;
 }
 
 /* Skip link */
@@ -134,7 +102,6 @@ body::-webkit-scrollbar-thumb:hover {
     position: fixed;
     inset: 0;
     z-index: -1;
-    /* Below ambient-bg but above body background */
     pointer-events: none;
     overflow: hidden;
 }
@@ -146,22 +113,18 @@ body::-webkit-scrollbar-thumb:hover {
     background: radial-gradient(circle at center, transparent 30%, var(--carbon) 70%);
     pointer-events: none;
     z-index: 1;
-    /* Above shapes, below content */
 }
 
 .shape-item {
     position: absolute;
     background: var(--gold-glow);
-    opacity: 0.04;
-    /* Further reduced to prevent distraction */
+    opacity: 0.5;
     filter: blur(1px);
-    /* Added blur */
     pointer-events: none;
     will-change: transform;
     transform-origin: center center;
 }
 
-/* Different sizes and animation delays for variety */
 .shape-item:nth-child(odd) {
     animation-duration: 18s;
     animation-delay: 0s;
@@ -182,17 +145,8 @@ body::-webkit-scrollbar-thumb:hover {
     animation-delay: 2s;
 }
 
-/* Specific shape definitions */
 .shape-circle {
     border-radius: 50%;
-}
-
-.shape-square {
-    border-radius: 4px;
-}
-
-.shape-rectangle {
-    border-radius: 4px;
 }
 
 .shape-triangle {
@@ -251,14 +205,13 @@ body::-webkit-scrollbar-thumb:hover {
     padding: 0 clamp(1rem, 5vw, 2rem);
 }
 
-/* Section entrance animation (unified) */
+/* Section entrance animation */
 .section-animate {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1),
         transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1),
         background-color 1s ease-out;
-    /* Added background-color transition */
 }
 
 .section-animate.visible {
@@ -266,13 +219,12 @@ body::-webkit-scrollbar-thumb:hover {
     transform: translateY(0);
 }
 
-/* Hero Grid Overlay for Depth */
+/* Hero grid overlay */
 #hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image:
-        linear-gradient(var(--border-dim) 1px, transparent 1px),
+    background-image: linear-gradient(var(--border-dim) 1px, transparent 1px),
         linear-gradient(90deg, var(--border-dim) 1px, transparent 1px);
     background-size: 40px 40px;
     mask-image: radial-gradient(circle at center, black, transparent 80%);
@@ -393,7 +345,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .theme-toggle,
 .mobile-toggle {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--toggle-button-bg);
     border: 1px solid var(--border-dim);
     border-radius: 40px;
     width: 38px;
@@ -407,6 +359,10 @@ body::-webkit-scrollbar-thumb:hover {
     transition: all var(--transition-smooth);
 }
 
+.light-mode .theme-toggle,
+.light-mode .mobile-toggle {
+    background: var(--toggle-button-bg);
+}
 .theme-toggle:hover,
 .mobile-toggle:hover {
     background: rgba(245, 200, 75, 0.15);
@@ -417,7 +373,7 @@ body::-webkit-scrollbar-thumb:hover {
     display: none;
 }
 
-/* Mobile menu overlay & active state */
+/* Mobile menu */
 @media (max-width: 768px) {
     .mobile-toggle {
         display: inline-flex;
@@ -425,13 +381,15 @@ body::-webkit-scrollbar-thumb:hover {
 
     .nav-menu {
         position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100%;
+        top: 4.25rem;
+        right: -1rem;
+        bottom: 0;
+        left: auto;
+        width: min(200px, 90%);
+        height: 100vh;
         flex-direction: column;
         background: var(--glass-strong);
         backdrop-filter: blur(30px);
-        justify-content: center;
         align-items: center;
         gap: 2.5rem;
         overflow-y: auto;
@@ -442,6 +400,7 @@ body::-webkit-scrollbar-thumb:hover {
         transition: transform 0.5s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.5s cubic-bezier(0.7, 0, 0.3, 1);
         pointer-events: none;
         z-index: 9999;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
     }
 
     .nav-menu.active {
@@ -497,7 +456,7 @@ body::-webkit-scrollbar-thumb:hover {
     }
 }
 
-/* ---------- HERO (Global) ---------- */
+/* HERO Split */
 .hero-split {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -559,12 +518,11 @@ body::-webkit-scrollbar-thumb:hover {
 .hero-portrait {
     width: min(420px, 88vw);
     aspect-ratio: 1/1;
-    position: relative;
 }
 
 .hexagon-frame {
     background: var(--card-bg);
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     border: 2px solid var(--gold);
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2), 0 0 0 6px var(--gold), var(--shadow-lg);
 }
@@ -573,7 +531,11 @@ body::-webkit-scrollbar-thumb:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.hero-portrait {
+    position: relative;
 }
 
 .hero-portrait::after {
@@ -586,7 +548,6 @@ body::-webkit-scrollbar-thumb:hover {
     filter: blur(20px);
 }
 
-/* Live light border pulse */
 .live-border {
     animation: borderPulse 2s infinite ease-in-out;
 }
@@ -605,7 +566,7 @@ body::-webkit-scrollbar-thumb:hover {
     }
 }
 
-/* Hero Mobile Overrides */
+/* Mobile reorder */
 @media (max-width: 768px) {
     .hero-split {
         grid-template-columns: 1fr;
@@ -677,7 +638,7 @@ body::-webkit-scrollbar-thumb:hover {
     }
 }
 
-/* Apply distinct background colors to each section */
+/* Section background colors */
 #hero {
     background-color: var(--section-bg-1);
 }
@@ -698,7 +659,7 @@ body::-webkit-scrollbar-thumb:hover {
     background-color: var(--section-bg-5);
 }
 
-/* About, Bento, Timeline (Global) */
+/* About */
 .precision-about {
     padding: var(--space-lg) 0;
 }
@@ -724,33 +685,20 @@ body::-webkit-scrollbar-thumb:hover {
 
 .about-points {
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
 }
 
 .about-points li {
-    background: var(--card-bg);
-    border: 1px solid var(--border-dim);
-    padding: 1.2rem;
-    border-radius: 16px;
+    margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    transition: transform var(--transition-smooth), border-color var(--transition-smooth);
+    gap: 0.75rem;
 }
 
-.about-points li:hover {
-    transform: translateX(10px);
-    border-color: var(--gold);
-}
-
-.about-points li i {
+.about-points i {
     color: var(--gold);
-    font-size: 1.2rem;
-    flex-shrink: 0;
 }
 
+/* Bento Skills */
 .bento-skills {
     padding: var(--space-lg) 0;
 }
@@ -803,6 +751,7 @@ body::-webkit-scrollbar-thumb:hover {
     margin-bottom: 1rem;
 }
 
+/* Timeline */
 .timeline-draw {
     padding: var(--space-lg) 0;
 }
@@ -888,6 +837,10 @@ body::-webkit-scrollbar-thumb:hover {
         left: 20px;
     }
 
+    .timeline-items {
+        margin-left: 0;
+    }
+
     .timeline-node {
         width: calc(100% - 40px);
         align-self: flex-end !important;
@@ -898,7 +851,7 @@ body::-webkit-scrollbar-thumb:hover {
     }
 }
 
-/* Horizontal gallery (Global) */
+/* Horizontal gallery */
 .horizontal-gallery {
     padding: var(--space-lg) 0;
     overflow-x: hidden;
@@ -926,21 +879,22 @@ body::-webkit-scrollbar-thumb:hover {
     padding-bottom: 1rem;
 }
 
-.project-card {
-    scroll-snap-align: start;
-}
-
 .horizontal-scroll::-webkit-scrollbar {
     height: 6px;
 }
 
 .horizontal-scroll::-webkit-scrollbar-track {
     background: transparent;
+    border-radius: 10px;
 }
 
 .horizontal-scroll::-webkit-scrollbar-thumb {
     background: var(--gold);
     border-radius: 10px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb:hover {
+    background: #e6b422;
 }
 
 .gallery-track {
@@ -956,6 +910,7 @@ body::-webkit-scrollbar-thumb:hover {
     border-radius: 26px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s;
+    scroll-snap-align: start;
 }
 
 .project-card:hover {
@@ -979,7 +934,24 @@ body::-webkit-scrollbar-thumb:hover {
     }
 }
 
-/* Contact (Global) */
+@supports not (scroll-snap-type: x mandatory) {
+    .horizontal-scroll {
+        overflow-x: visible;
+    }
+
+    .gallery-track {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        width: auto;
+    }
+}
+
+.scroll-navigation {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Contact */
 .contact-fusion {
     padding: var(--space-lg) 0;
 }
@@ -1006,12 +978,13 @@ body::-webkit-scrollbar-thumb:hover {
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border-dim);
-    transition: transform 0.3s ease, background 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
     margin-bottom: 1rem;
 }
 
 .contact-card:hover {
     transform: translateX(8px);
+    background: rgba(255, 255, 255, 0.06);
     border-color: var(--gold-glow);
 }
 
@@ -1023,6 +996,7 @@ body::-webkit-scrollbar-thumb:hover {
 .contact-card .contact-value {
     text-decoration: none;
     color: var(--text-light);
+    transition: color 0.2s ease;
 }
 
 .contact-card .contact-value:hover {
@@ -1034,6 +1008,14 @@ body::-webkit-scrollbar-thumb:hover {
     gap: 0.8rem;
     flex-wrap: wrap;
     margin: 1rem 0;
+}
+
+.social-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
 }
 
 .social-glow {
@@ -1052,6 +1034,7 @@ body::-webkit-scrollbar-thumb:hover {
     border: 1px solid var(--border-dim);
     border-radius: 14px;
     color: var(--text-light);
+    font-size: 1.25rem;
     text-decoration: none;
     transition: all var(--transition-smooth);
 }
@@ -1059,8 +1042,9 @@ body::-webkit-scrollbar-thumb:hover {
 .social-glow a:hover {
     background: var(--gold-glow);
     border-color: var(--gold);
+    color: var(--gold);
     transform: translateY(-5px);
-    box-shadow: 0 0 15px var(--gold-glow);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px var(--gold-glow);
 }
 
 .edu-card {
@@ -1093,11 +1077,14 @@ body::-webkit-scrollbar-thumb:hover {
 .field-input:focus {
     border-color: var(--gold);
     outline: none;
+    box-shadow: 0 0 0 3px rgba(245, 200, 75, 0.2);
 }
 
 @media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
 
-    .contact-grid,
     .form-row--two {
         grid-template-columns: 1fr;
     }
@@ -1113,43 +1100,46 @@ body::-webkit-scrollbar-thumb:hover {
     font-size: 0.8rem;
 }
 
-/* Hexagon Overlay */
+/* Back to top button */
+.back-to-top-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: #000;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 99;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top-btn:hover {
+    transform: translateY(-4px);
+    background: #e6b422;
+}
+
+/* Hexagon Overlay for Theme Toggle */
 .hex-overlay {
     position: fixed;
     inset: 0;
     z-index: 9999;
     pointer-events: none;
-}
-
-/* Back to Top Button */
-.back-to-top-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--gold);
-    color: var(--carbon);
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    z-index: 999;
-    box-shadow: var(--shadow-md);
-}
-.back-to-top-btn.show {
-    opacity: 1;
-    visibility: visible;
-}
-.back-to-top-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg)hidden;
+    overflow: hidden;
 }
 
 .hex-cell {
@@ -1159,10 +1149,11 @@ body::-webkit-scrollbar-thumb:hover {
     clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
     background: var(--hex-color, var(--carbon));
     border: 1px solid rgba(245, 200, 75, 0.3);
-    transform: scale(0);
+    transform: scale(1.5);
     opacity: 0;
-    transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1) var(--d, 0ms),
-        opacity 400ms cubic-bezier(0.4, 0, 0.2, 1) var(--d, 0ms);
+    transition: transform 100ms cubic-bezier(0.4, 0, 0.2, 1) var(--d, 0ms),
+        opacity 100ms cubic-bezier(0.4, 0, 0.2, 1) var(--d, 0ms);
+    will-change: transform, opacity;
 }
 
 .hex-overlay.on .hex-cell {
@@ -1170,39 +1161,16 @@ body::-webkit-scrollbar-thumb:hover {
     opacity: 1;
 }
 
-/* Back to Top Button */
-.back-to-top-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--gold);
-    color: var(--carbon);
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    z-index: 999;
-    box-shadow: var(--shadow-md);
-}
-.back-to-top-btn.show {
-    opacity: 1;
-    visibility: visible;
-}
-.back-to-top-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
 .hex-overlay.out .hex-cell {
     transition-delay: var(--dout, 0ms);
     transform: scale(0);
     opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hex-overlay,
+    .hex-cell {
+        transition: none !important;
+    }
 }
