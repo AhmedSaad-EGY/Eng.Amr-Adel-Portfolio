@@ -421,7 +421,7 @@
     ".floating-shapes-container",
   );
   if (floatingShapesContainer && !prefersReducedMotion) {
-    const numberOfShapes = 12; 
+    const numberOfShapes = 15;
     const shapeClasses = [
       "shape-circle",
       "shape-square",

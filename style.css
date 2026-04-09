@@ -19,7 +19,8 @@
     --card-bg: rgba(255, 255, 255, 0.06);
     --glass-bg: rgba(15, 22, 32, 0.52);
     --glass-strong: rgba(15, 22, 32, 0.74);
-    --toggle-button-bg: rgba(255, 255, 255, 0.08); /* Default for dark mode */
+    --toggle-button-bg: rgba(255, 255, 255, 0.08);
+    /* Default for dark mode */
     --shadow-md: 0 18px 45px rgba(0, 0, 0, 0.35);
     --shadow-lg: 0 30px 90px rgba(0, 0, 0, 0.55);
     --transition-smooth: 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -49,7 +50,7 @@
     --border-dim: #DDDDDD;
     --card-bg: rgba(255, 255, 255, 0.85);
     --glass-bg: rgba(245, 245, 245, 0.9);
-    --glass-strong: rgba(255, 255, 255, 0.95); 
+    --glass-strong: rgba(255, 255, 255, 0.95);
     --gold-glow: rgba(106, 80, 17, 0.25);
     --toggle-button-bg: rgba(0, 0, 0, 0.08);
 }
@@ -363,6 +364,7 @@ body {
 .light-mode .mobile-toggle {
     background: var(--toggle-button-bg);
 }
+
 .theme-toggle:hover,
 .mobile-toggle:hover {
     background: rgba(245, 200, 75, 0.15);
@@ -518,52 +520,119 @@ body {
 .hero-portrait {
     width: min(420px, 88vw);
     aspect-ratio: 1/1;
+    position: relative;
+    animation: portraitFloat 6s ease-in-out infinite;
+    transition: transform var(--transition-smooth);
+    z-index: 1;
+    filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.4));
 }
 
 .hexagon-frame {
-    background: var(--card-bg);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    border: 2px solid var(--gold);
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2), 0 0 0 6px var(--gold), var(--shadow-lg);
+    background: linear-gradient(90deg, var(--gold), #fff, var(--gold), #fff, var(--gold));
+    background-size: 400% 100%;
+    animation: borderShine 5s linear infinite;
+    padding: 5px;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-portrait__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.hero-portrait {
-    position: relative;
+.hero-portrait:hover {
+    transform: scale(1.03) translateY(-5px);
+}
+
+.hero-portrait:hover .hero-portrait__img {
+    transform: scale(1.1);
+}
+
+/* Interactive Shine Effect */
+.hero-portrait::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.25),
+            transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s ease-in-out;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hero-portrait:hover::before {
+    left: 150%;
 }
 
 .hero-portrait::after {
     content: '';
     position: absolute;
-    inset: -10%;
-    background: radial-gradient(circle at center, rgba(245, 200, 75, 0.1) 0%, transparent 70%);
+    inset: -5%;
+    background: radial-gradient(circle at center, var(--gold-glow) 0%, transparent 70%);
     z-index: -1;
     border-radius: 50%;
-    filter: blur(20px);
+    filter: blur(35px);
+    animation: glowPulse 4s infinite alternate ease-in-out;
 }
 
 .live-border {
-    animation: borderPulse 2s infinite ease-in-out;
+    /* Pulse removed in favor of animated gradient background in hexagon-frame */
 }
 
-@keyframes borderPulse {
+@keyframes borderShine {
     0% {
-        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2), 0 0 0 6px var(--gold), 0 0 0 0 rgba(245, 200, 75, 0.7);
-    }
-
-    50% {
-        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2), 0 0 0 6px var(--gold), 0 0 0 12px rgba(245, 200, 75, 0.3);
+        background-position: 0% 50%;
     }
 
     100% {
-        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2), 0 0 0 6px var(--gold), 0 0 0 0 rgba(245, 200, 75, 0);
+        background-position: 400% 50%;
     }
+}
+
+@keyframes portraitFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes glowPulse {
+    from {
+        opacity: 0.3;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+/* Hide mobile card by default */
+.mobile-hero-card {
+    display: none;
 }
 
 /* Mobile reorder */
@@ -579,6 +648,44 @@ body {
         margin-right: auto;
     }
 
+    /* Hide desktop hero content on mobile */
+    .hero-left,
+    .hero-right {
+        display: none;
+    }
+
+    /* Show and style mobile hero card */
+    .mobile-hero-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 2.5rem 1.5rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border-dim);
+        border-radius: 32px;
+        margin: 2rem auto;
+        max-width: 400px;
+        box-shadow: var(--shadow-md);
+        gap: 1rem;
+        backdrop-filter: blur(12px);
+    }
+
+    .mobile-hero-card .hero-portrait {
+        width: 200px;
+        height: 200px;
+        margin-bottom: 0.5rem;
+    }
+
+    .mobile-hero-card .mobile-hero-name {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        line-height: 1.1;
+        color: var(--text-light);
+        margin: 0;
+    }
+
     .hero-stats {
         justify-content: center;
     }
@@ -587,12 +694,21 @@ body {
         justify-content: center;
     }
 
-    .hero-right {
-        order: 2;
+    /* Styles for the badge and tagline within the mobile card */
+    .mobile-hero-card .mobile-hero-badge {
+        font-size: 0.75rem;
+        /* Slightly larger than desktop hero-badge on mobile */
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--gold);
+        margin-bottom: 0.5rem;
     }
 
-    .hero-left {
-        order: 1;
+    .mobile-hero-card .mobile-hero-tagline {
+        font-size: 0.95rem;
+        /* Slightly larger than desktop hero-tagline on mobile */
+        color: var(--text-muted);
+        line-height: 1.4;
     }
 }
 
