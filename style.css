@@ -307,7 +307,7 @@ body {
 
 .nav-menu {
     display: flex;
-    gap: 2rem;
+    gap: 1.2rem;
     list-style: none;
 }
 
@@ -394,7 +394,7 @@ body {
         backdrop-filter: blur(30px);
         align-items: center;
         gap: 2.5rem;
-        overflow-y: auto;
+        overflow: auto;
         padding: 2rem;
         text-align: center;
         transform: translateX(100%);
@@ -592,10 +592,6 @@ body {
     animation: glowPulse 4s infinite alternate ease-in-out;
 }
 
-.live-border {
-    /* Pulse removed in favor of animated gradient background in hexagon-frame */
-}
-
 @keyframes borderShine {
     0% {
         background-position: 0% 50%;
@@ -686,6 +682,22 @@ body {
         margin: 0;
     }
 
+    .mobile-hero-card .hero-stats {
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        width: 100%;
+    }
+
+    .mobile-hero-card .hero-stats>div {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .mobile-hero-card .hero-stats span {
+        font-size: 1.3rem;
+    }
+
     .hero-stats {
         justify-content: center;
     }
@@ -697,7 +709,6 @@ body {
     /* Styles for the badge and tagline within the mobile card */
     .mobile-hero-card .mobile-hero-badge {
         font-size: 0.75rem;
-        /* Slightly larger than desktop hero-badge on mobile */
         text-transform: uppercase;
         letter-spacing: 2px;
         color: var(--gold);
@@ -706,7 +717,6 @@ body {
 
     .mobile-hero-card .mobile-hero-tagline {
         font-size: 0.95rem;
-        /* Slightly larger than desktop hero-tagline on mobile */
         color: var(--text-muted);
         line-height: 1.4;
     }
@@ -781,22 +791,45 @@ body {
 }
 
 .about-grid {
-    display: flex;
-    gap: 3rem;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /* Adjust grid for better layout */
+    gap: 2.5rem;
+    align-items: flex-start;
+    /* Align items to the start of the cross axis */
+    background: var(--glass-bg);
+    /* Apply glass background to the grid container */
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-dim);
+    border-radius: 28px;
+    padding: 2.5rem;
 }
 
 .about-quote {
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 600;
-    flex: 1;
+    /* flex: 1; */
+    /* Removed as we are using grid now */
     border-left: 3px solid var(--gold);
     padding-left: 1.5rem;
+    padding-right: 1rem;
+    /* Add some padding for better spacing */
+    /* No need for individual glass background here if applied to parent grid */
+    /* background: var(--glass-bg); */
+    /* backdrop-filter: blur(12px); */
+    /* border: 1px solid var(--border-dim); */
+    /* border-radius: 20px; */
 }
 
 .about-text {
-    flex: 2;
     color: var(--text-muted);
+    /* No need for individual glass background here if applied to parent grid */
+    /* background: var(--glass-bg); */
+    /* backdrop-filter: blur(12px); */
+    /* border: 1px solid var(--border-dim); */
+    /* border-radius: 20px; */
+    padding-left: 1rem;
+    /* Add some padding for better spacing */
 }
 
 .about-points {
@@ -808,10 +841,34 @@ body {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    /* If you want each list item to have a subtle glass effect, uncomment below */
+    /* background: rgba(255, 255, 255, 0.02); */
+    /* border-radius: 8px; */
+    /* padding: 0.5rem 1rem; */
+    /* border: 1px solid rgba(255, 255, 255, 0.05); */
 }
 
 .about-points i {
     color: var(--gold);
+}
+
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        /* Stack columns on mobile */
+        padding: 1.5rem;
+    }
+
+    .about-quote {
+        padding-left: 1rem;
+        padding-right: 0;
+        margin-bottom: 1.5rem;
+        /* Add space between quote and text on mobile */
+    }
+
+    .about-text {
+        padding-left: 0;
+    }
 }
 
 /* Bento Skills */
@@ -1022,6 +1079,9 @@ body {
 
 .project-card {
     width: 360px;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
     background: var(--card-bg);
     border-radius: 26px;
     overflow: hidden;
@@ -1034,19 +1094,31 @@ body {
     box-shadow: var(--shadow-lg);
 }
 
+.project-img {
+    height: 70%;
+    width: 100%;
+    overflow: hidden;
+}
+
 .project-img img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
 }
 
 .project-body {
+    height: 30%;
     padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 @media (max-width: 768px) {
     .project-card {
         width: 280px;
+        height: 400px;
     }
 }
 

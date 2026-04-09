@@ -109,6 +109,69 @@
   window.addEventListener("scroll", handleNavScroll, { passive: true });
   handleNavScroll();
 
+  // ========== TYPING EFFECT FOR SECTION HEADERS ==========
+  const sectionTitles = document.querySelectorAll(".section-title h2");
+  const originalTitles = new Map(); // Store original text to re-type
+  const typingIntervals = new Map(); // Store interval IDs to clear them
+
+  if (!prefersReducedMotion) {
+    sectionTitles.forEach((titleElement) => {
+      // Lock the height of the container to its current rendered height
+      // This prevents the page from "jumping" when the text is cleared.
+      const initialHeight = titleElement.offsetHeight;
+      if (initialHeight > 0) {
+        titleElement.style.minHeight = `${initialHeight}px`;
+      }
+      originalTitles.set(titleElement, titleElement.innerHTML); // Store full HTML
+      titleElement.innerHTML = ""; // Clear HTML initially
+    });
+
+    const typeText = (element, originalHtml, delay = 50) => {
+      if (typingIntervals.has(element)) {
+        clearInterval(typingIntervals.get(element)); // Clear any existing interval
+      }
+      let charIndex = 0;
+      let currentHtml = "";
+      const interval = setInterval(() => {
+        if (charIndex < originalHtml.length) {
+          // Match either a full HTML tag or a single character
+          const nextCharOrTagMatch = originalHtml
+            .substring(charIndex)
+            .match(/<[^>]+>|./);
+          const nextChunk = nextCharOrTagMatch ? nextCharOrTagMatch[0] : "";
+          currentHtml += nextChunk;
+          element.innerHTML = currentHtml;
+          charIndex += nextChunk.length;
+        } else {
+          clearInterval(interval);
+          // Schedule restart after 2 seconds
+          setTimeout(() => {
+            element.innerHTML = ""; // Clear for restart
+            typeText(element, originalHtml, delay);
+          }, 2000); // 2 seconds delay
+        }
+      }, delay);
+      typingIntervals.set(element, interval); // Store interval ID
+    };
+
+    const titleObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const element = entry.target;
+            const fullHtml = originalTitles.get(element);
+
+            // Only start typing if not already active to prevent scroll-flicker
+            if (element.innerHTML === "" && !typingIntervals.has(element)) {
+              typeText(element, fullHtml);
+            }
+          }
+        });
+      },
+      { threshold: 0.7 }, // Trigger when 70% of the title is visible
+    );
+    sectionTitles.forEach((title) => titleObserver.observe(title));
+  }
   // ========== TEXT SCRAMBLE (view‑triggered) ==========
   const scrambleElement = document.getElementById("scrambleTitle");
   if (scrambleElement && !prefersReducedMotion) {
@@ -384,7 +447,7 @@
   }
 
   // ========== BUTTON ACTIONS ==========
-  document.getElementById("magneticCV")?.addEventListener("click", () => {
+  const downloadCV = () => {
     const blob = new Blob(
       [
         "AMR ADEL - Senior Land Surveyor\nPhone: 01062978485\nEmail: amr163874@gmail.com",
@@ -396,10 +459,19 @@
     link.download = "Amr_Adel_CV.txt";
     link.click();
     URL.revokeObjectURL(link.href);
-  });
-  document.getElementById("magneticContact")?.addEventListener("click", () => {
+  };
+
+  const scrollToContact = () =>
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-  });
+
+  document.getElementById("magneticCV")?.addEventListener("click", downloadCV);
+  document
+    .getElementById("magneticContact")
+    ?.addEventListener("click", scrollToContact);
+  document.getElementById("mobileCV")?.addEventListener("click", downloadCV);
+  document
+    .getElementById("mobileContact")
+    ?.addEventListener("click", scrollToContact);
 
   // ========== HORIZONTAL SCROLL WHEEL ==========
   const horizScroll = document.querySelector(".horizontal-scroll");
